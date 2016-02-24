@@ -4,13 +4,15 @@ from django.http import HttpResponse
 from django.conf import settings
 
 from wxgz.utils import (
-    get_user_info, authorized, verify_signature, request_user_info_by_code_asy
+    get_user_info, verify_signature, request_user_info_by_code_asy,
+    log_params, authorized,
 )
 
 
 TOKEN = settings.TOKEN
 
 
+@log_params
 def deal_server_verification(request):
     '''
     处理微信的服务器验证
@@ -42,4 +44,4 @@ def get_self_info(request):
     '''
     code = request.session['user_code']
     user_info = get_user_info(code)
-    return HttpResponse('获取用户自己的用户信息')
+    return HttpResponse(user_info)
