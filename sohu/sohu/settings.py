@@ -140,7 +140,7 @@ LOGGING = {
 #       Test Configure
 # -----------------------------------------------------
 # USE nose to run all tests
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+# TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 # Tell nose to measure converage on these apps
 NOSE_ARGS = [
