@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'wxgz',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -100,3 +101,36 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# -----------------------------------------------------
+#       Logging Configure
+# -----------------------------------------------------
+LOGGING = {
+    'version': 1,
+    'disable_existion_loggers': False,
+    'formatters': {
+        'simple': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s',
+        },
+    },
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'handlers': {
+        'wxgz_handler': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/sohu/wxgz.log',
+            'formatter': 'simple',
+        },
+    },
+    'loggers': {
+        'wxgz': {
+            'handlers': ['wxgz_handler'],
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+        },
+    },
+}
