@@ -7,7 +7,11 @@ def deal_server_verification(request):
     '''
     处理微信的服务器验证
     '''
-    return HttpResponse('处理微信的服务器验证')
+    signature = request.GET['signature']
+    timestamp = request.GET['timestamp']
+    nonce = request.GET['nonce']
+    echostr = request.GET['echostr']
+    return HttpResponse(echostr)
 
 
 def deal_user_authorization(request):

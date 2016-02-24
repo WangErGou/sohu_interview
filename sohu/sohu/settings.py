@@ -134,3 +134,9 @@ LOGGING = {
         },
     },
 }
+
+# -----------------------------------------------------
+#       Weixing Configure
+# -----------------------------------------------------
+TOKEN = 'Token123456'
+ENCODING_AESKEY = 'lBpKos3TCHClNYPbRMUBJalUoR3WHbBzIO6VK5LFuMJ'
