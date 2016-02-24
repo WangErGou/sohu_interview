@@ -138,5 +138,6 @@ LOGGING = {
 # -----------------------------------------------------
 #       Weixing Configure
 # -----------------------------------------------------
+APP_ID = 'wxb810fba238400a9f'
+APP_Se = '9d46407240abb54697ea32c559bbd7a3'
 TOKEN = 'Token123456'
-ENCODING_AESKEY = 'lBpKos3TCHClNYPbRMUBJalUoR3WHbBzIO6VK5LFuMJ'
