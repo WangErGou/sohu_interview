@@ -37,7 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'wxgz',
+    'wxgz', # wei xing gong zhong hao
+    'django_nose', # just for testing
 )
 
 MIDDLEWARE_CLASSES = (
@@ -134,6 +135,19 @@ LOGGING = {
         },
     },
 }
+
+# -----------------------------------------------------
+#       Test Configure
+# -----------------------------------------------------
+# USE nose to run all tests
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+# Tell nose to measure converage on these apps
+NOSE_ARGS = [
+    '--with-coverage',
+    '--cover-package=wxgz',
+]
+
 
 # -----------------------------------------------------
 #       Weixing Configure
