@@ -5,7 +5,7 @@ from django.db import models
 
 class User(models.Model):
     # 基本信息
-    openid = models.CharField(max_length=128)
+    openid = models.CharField(max_length=128, unique=True)
     nickname = models.CharField(max_length=256)
     SEX_ENUM = (
         (1, '男'),
