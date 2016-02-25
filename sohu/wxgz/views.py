@@ -1,7 +1,12 @@
 # -*- coding:utf-8 -*-
 
+import logging
+
 from django.http import HttpResponse
 from django.conf import settings
+from django.shortcuts import render_to_response
+from django.template import RequestContext
+from django.core.urlresolvers import reverse
 
 from wxgz.utils import (
     get_user_info, verify_signature, request_user_info_by_code_asy,
@@ -9,6 +14,7 @@ from wxgz.utils import (
 )
 
 
+logger = logging.getLogger(__name__)
 TOKEN = settings.TOKEN
 
 
@@ -26,15 +32,19 @@ def deal_server_verification(request):
     return HttpResponse('禁止访问')
 
 
+@log_params
 def deal_user_authorization(request):
     '''
     处理用户授权
     '''
     code = request.GET['code']
+    logger.debug('receive code: {code}'.format(code=code))
     request.session['user_code'] = code
     # 根据 code 请求用户信息
     request_user_info_by_code_asy(code)
-    return HttpResponse('处理用户授权')
+    return render_to_response(
+        'magic.html', {'uri': reverse('GetUserInfo')},
+        context_instance=RequestContext(request))
 
 
 @authorized
@@ -44,4 +54,9 @@ def get_self_info(request):
     '''
     code = request.session['user_code']
     user_info = get_user_info(code)
-    return HttpResponse(user_info)
+
+    logger.debug(user_info)
+
+    return render_to_response(
+        'user_info.html', user_info,
+        context_instance=RequestContext(request))

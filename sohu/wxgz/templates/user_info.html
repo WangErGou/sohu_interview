@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8" />
+    <title> Magic </title>
+</head>
+<body>
+    {% if fail %}
+    <p>不认识你啊 :(</p>
+    {% else %}
+    <img src="{{ headimgurl }}" />
+    <p>
+        昵称<strong>{{ nickname }}</strong><br>
+        性别<strong>{{ sex }}</strong><br>
+        城市<strong>{{ city }}</strong><br>
+        省份<strong>{{ province }}</strong><br>
+        国家<strong>{{ country }}</strong><br>
+    </p>
+    {% endif %}
+</body>
+</html>

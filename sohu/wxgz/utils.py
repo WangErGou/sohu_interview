@@ -30,18 +30,23 @@ def request_access_token(code):
     r = requests.get(settings.ACCESS_TOKEN_URL, params=params, verify=False)
     data = r.json()
     if 'errcode' in data:
-        # logging err
-        return None
+        log_weixin_err(settings.ACCESS_TOKEN_URL, data)
+        return None, None
+
+    logger.debug('user authorization: {0}'.format(data))
     # redis: openid --> access_token, expires_in
     openid = data['openid']
     access_token = data['access_token']
     expires_in = data['expires_in']
-    assert isinstance(expires_in, int), type(expires_in)
     cache.set(openid, (access_token, expires_in), timeout=expires_in)
+    # redis: code --> openid
+    cache.set(code, openid)
     # MySQL: openid --> refresh_token
     refresh_token = data['refresh_token']
     try:
-        User(openid=openid, refresh_token=refresh_token).save()
+        user = User.objects.get_or_create(openid=openid)
+        user.refresh_token = refresh_token
+        user.save()
     except Exception:
         # TODO: logging exception
         pass
@@ -60,8 +65,10 @@ def request_user_info(openid, access_token, lang='zh_CN'):
     r = requests.get(settings.USER_INFO_URL, params=params, verify=False)
     user_info = json.loads(r.content)
     if 'errcode' in user_info:
-        # TODO logging err
+        log_weixin_err(settings.USER_INFO_URL, user_info)
         return None
+    logger.debug('user info: {0}'.format(user_info))
+    save_user_info(user_info)
     return user_info
 
 
@@ -124,7 +131,24 @@ def verify_signature(token, timestamp, nonce, signature):
 
 
 def get_user_info(code):
-    pass
+    openid = cache.get(code)
+    user = User.objects.get(openid=openid)
+    return package_user_info(user)
+
+
+def package_user_info(user):
+    '''
+    将 User 封装成 dict
+    '''
+    return {
+        'openid': user.openid,
+        'nickname': user.nickname,
+        'sex': user.get_sex_display(),
+        'city': user.city,
+        'province': user.province,
+        'country': user.country,
+        'headimgurl': user.headimgurl
+    }
 
 
 def save_user_info(user_info):
@@ -143,3 +167,8 @@ def save_user_info(user_info):
 
     user.save()
     return user
+
+
+def log_weixin_err(uri, err):
+    logger.info('URI: {uri}\nerrcode: {ec}, errmsg: {em}'.format(
+        uri=uri, ec=err['errcode'], em=err['errmsg']))
