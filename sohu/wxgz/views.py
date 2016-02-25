@@ -38,7 +38,7 @@ def deal_user_authorization(request):
     处理用户授权
     '''
     code = request.GET['code']
-    logger.debug('receive code: {code}'.format(code=code))
+    logger.debug('receive code: {code}'.format(code=code))  # debug
     request.session['user_code'] = code
     # 根据 code 请求用户信息
     request_user_info_by_code_asy(code)
@@ -54,9 +54,11 @@ def get_self_info(request):
     '''
     code = request.session['user_code']
     user_info = get_user_info(code)
-
-    logger.debug(user_info)
-
+    logger.debug(user_info) # debug
+    if user_info is None:
+        return render_to_response(
+            'user_info.html', {'fail': True},
+            context_instance=RequestContext(request))
     return render_to_response(
         'user_info.html', user_info,
         context_instance=RequestContext(request))

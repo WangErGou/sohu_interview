@@ -168,5 +168,5 @@ APPID = 'wxb810fba238400a9f'
 APP_SECERT = '9d46407240abb54697ea32c559bbd7a3'
 TOKEN = 'Token123456'
 
-ACCESS_TOKEN_URL = 'https://api.weixin.qq.com/sns/oauth2/access_token'
-USER_INFO_URL = 'https://api.weixin.qq.com/sns/userinfo'
+ACCESS_TOKEN_URI = 'https://api.weixin.qq.com/sns/oauth2/access_token'
+USER_INFO_URI = 'https://api.weixin.qq.com/sns/userinfo'
