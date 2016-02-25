@@ -104,6 +104,16 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # -----------------------------------------------------
+#       Redis Cache
+# -----------------------------------------------------
+CACHES = {
+    'default': {
+        'BACKEND': 'redis_cache.RedisCache',
+        'LOCATION': 'localhost:6379',
+    },
+}
+
+# -----------------------------------------------------
 #       Logging Configure
 # -----------------------------------------------------
 LOGGING = {
@@ -152,6 +162,9 @@ NOSE_ARGS = [
 # -----------------------------------------------------
 #       Weixing Configure
 # -----------------------------------------------------
-APP_ID = 'wxb810fba238400a9f'
-APP_Se = '9d46407240abb54697ea32c559bbd7a3'
+APPID = 'wxb810fba238400a9f'
+APP_SECERT = '9d46407240abb54697ea32c559bbd7a3'
 TOKEN = 'Token123456'
+
+ACCESS_TOKEN_URL = 'https://api.weixin.qq.com/sns/oauth2/access_token'
+USER_INFO_URL = 'https://api.weixin.qq.com/sns/userinfo'
