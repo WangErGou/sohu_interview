@@ -6,15 +6,17 @@
 </head>
 <body>
     {% if fail %}
-    <p>不认识你啊 :(</p>
+    <p><font size=200>不认识你啊 :(</font></p>
     {% else %}
     <img src="{{ headimgurl }}" />
     <p>
-        昵称<strong>{{ nickname }}</strong><br>
-        性别<strong>{{ sex }}</strong><br>
-        城市<strong>{{ city }}</strong><br>
-        省份<strong>{{ province }}</strong><br>
-        国家<strong>{{ country }}</strong><br>
+        <font size=200>
+            昵称<strong>{{ nickname }}</strong><br>
+            性别<strong>{{ sex }}</strong><br>
+            城市<strong>{{ city }}</strong><br>
+            省份<strong>{{ province }}</strong><br>
+            国家<strong>{{ country }}</strong><br>
+        </font>
     </p>
     {% endif %}
 </body>
