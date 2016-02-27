@@ -186,4 +186,4 @@ def package_user_info(user):
 
 
 def log_db_exception(e):
-    logger.error('数据库错误: {e}'.format(e))
+    logger.error('数据库错误: {0}'.format(e))
