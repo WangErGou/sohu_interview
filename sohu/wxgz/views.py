@@ -12,6 +12,7 @@ from wxgz.utils import (
     get_user_info, verify_signature, request_user_info_by_code_asy,
     log_params, authorized,
 )
+from wxgz.exceptions import UserDoesNotExist
 
 
 logger = logging.getLogger(__name__)
@@ -51,9 +52,10 @@ def get_self_info(request):
     获取用户自己的用户信息
     '''
     code = request.session['user_code']
-    user_info = get_user_info(code)
-    logger.debug(user_info) # debug
-    if user_info is None:
+    try:
+        user_info = get_user_info(code)
+    except UserDoesNotExist as e:
+        logger.info('查询的用户不存在: {0}'.format(e))
         return render_to_response(
             'user_info.html', {'fail': True},
             context_instance=RequestContext(request))

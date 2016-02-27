@@ -9,6 +9,7 @@ import requests
 from django.conf import settings
 from django.core.cache import cache
 from django.core.exceptions import ObjectDoesNotExist
+from django.shortcuts import redirect
 
 from wxgz.models import User
 from wxgz.exceptions import WXRequestException
@@ -20,7 +21,16 @@ logger = logging.getLogger(__name__)
 #       Request from weixin
 # ----------------------------------------------
 def query_from_wx(uri, params={}, method='get'):
-    r = getattr(requests, method)(uri, params=params, verify=False)
+    '''
+    从微信服务器请求数据。
+
+    当网络出错或微信服务器返回错误时，都抛出异常
+    '''
+    try:
+        r = getattr(requests, method)(uri, params=params, verify=False)
+    except requests.exceptions.RequestException as e:
+        logger.warning(e)
+        raise WXRequestException(uri, 'requests异常')
     data = json.loads(r.content)
     if 'errcode' in data:
         raise WXRequestException(r.url, data)
@@ -73,7 +83,7 @@ def save_token(openid, access_token, expires, refresh_token):
     cache.set(openid, (access_token, expires), timeout=expires)
     # MySQL: openid --> refresh_token
     try:
-        user = User.objects.get_or_create(openid=openid)
+        user, _ = User.objects.get_or_create(openid=openid)
         user.refresh_token = refresh_token
         user.save()
     except Exception as e:
@@ -85,15 +95,15 @@ def save_user_info(user_info):
     将微信返回的用户信息保存到数据库中
     '''
     openid = user_info['openid']
-
+    # get or create user
     user, _ = User.objects.get_or_create(openid=openid)
+    # update data
     user.nickname = user_info['nickname']
     user.sex = user_info['sex']
     user.city = user_info['city']
     user.province = user_info['province']
     user.country = user_info['country']
     user.headimgurl = user_info['headimgurl']
-
     user.save()
     return user
 
@@ -124,15 +134,17 @@ def authorized(func):
         if 'user_code' in request.session:
             return func(request, *args, **kwargs)
         else:
-            # 重定向到授权页面
-            # TODO 怎么引导用户到授权页面，特别是用户首次进入时
-            pass
+            logger.debug('authorized hello')
+            return redirect(settings.ACCESS_SERVICE_URI)
     return _wrapped_func
 
 
+# just for debug
 def log_params(func):
     '''
-    调试接口用，记录请求的 URI，GET，POST 参数
+    接口调试。
+    
+    记录请求的 URI，GET，POST 参数
     '''
     @wraps(func)
     def _wrapped_func(request, *args, **kwargs):
@@ -163,10 +175,7 @@ def verify_signature(token, timestamp, nonce, signature):
 
 def get_user_info(code):
     openid = cache.get(code)
-    try:
-        user = User.objects.get(openid=openid)
-    except ObjectDoesNotExist:
-        return None
+    user = User.objects.get(openid=openid)
     return package_user_info(user)
 
 

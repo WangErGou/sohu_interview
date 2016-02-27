@@ -170,3 +170,10 @@ TOKEN = 'Token123456'
 
 ACCESS_TOKEN_URI = 'https://api.weixin.qq.com/sns/oauth2/access_token'
 USER_INFO_URI = 'https://api.weixin.qq.com/sns/userinfo'
+
+ACCESS_SERVICE_URI = (
+    'https://open.weixin.qq.com/connect/oauth2/authorize'
+    '?appid=wxb810fba238400a9f'
+    '&redirect_uri=http%3A%2F%2F123.57.235.88%2FuserAuthorization%2F'
+    '&response_type=code&scope=snsapi_userinfo&state=state#wechat_redirect'
+)
