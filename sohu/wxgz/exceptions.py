@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 
 
+from django.utils.datastructures import MultiValueDictKeyError
 from django.core.exceptions import ObjectDoesNotExist
 
 
@@ -18,5 +19,25 @@ class WXRequestException(Exception):
 class UserDoesNotExist(ObjectDoesNotExist):
     '''
     用户不存在
+    '''
+    pass
+
+
+# 接口调用错误
+class ParamError(Exception):
+    '''
+    参数错误
+    '''
+    pass
+
+
+# 参数缺失
+ParamMiss = MultiValueDictKeyError
+
+
+# 未考虑的服务端错误
+class ServerException(Exception):
+    '''
+    服务端错误
     '''
     pass

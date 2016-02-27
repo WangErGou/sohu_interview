@@ -50,6 +50,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'wxgz.middleware.ViewExceptionMiddleware',  # view exception
 )
 
 ROOT_URLCONF = 'sohu.urls'
