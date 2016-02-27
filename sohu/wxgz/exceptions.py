@@ -16,11 +16,7 @@ class WXRequestException(Exception):
         self.wx_err = wx_err
 
 
-class UserDoesNotExist(ObjectDoesNotExist):
-    '''
-    用户不存在
-    '''
-    pass
+UserDoesNotExist = ObjectDoesNotExist
 
 
 # 接口调用错误
