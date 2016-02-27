@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+from __future__ import absolute_import
 
 import logging
 import hashlib
@@ -6,9 +7,9 @@ import json
 from functools import wraps
 
 import requests
+from celery import shared_task
 from django.conf import settings
 from django.core.cache import cache
-from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import redirect
 
 from wxgz.models import User
@@ -108,6 +109,7 @@ def save_user_info(user_info):
     return user
 
 
+@shared_task
 def request_user_info_by_code_asy(code, lang='zh_CN'):
     '''
     根据用户授权后返回的 code 来获取用户信息
@@ -119,6 +121,7 @@ def request_user_info_by_code_asy(code, lang='zh_CN'):
         logger.info('从微信请求数据失败。URI: {uri}, err: {err}'.format(
             uri=e.uri, err=e.wx_err))
         return None
+    logger.debug('request_user_unfo: {user_info}'.format(user_info=user_info))  # debug
     return user_info
 
 
@@ -143,7 +146,6 @@ def authorized(func):
 def log_params(func):
     '''
     接口调试。
-    
     记录请求的 URI，GET，POST 参数
     '''
     @wraps(func)

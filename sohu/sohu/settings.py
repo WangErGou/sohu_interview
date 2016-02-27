@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'wxgz', # wei xing gong zhong hao
     'django_nose', # just for testing
+    'djcelery', # celry for asynchronous
 )
 
 MIDDLEWARE_CLASSES = (
@@ -178,3 +179,13 @@ ACCESS_SERVICE_URI = (
     '&redirect_uri=http%3A%2F%2F123.57.235.88%2FuserAuthorization%2F'
     '&response_type=code&scope=snsapi_userinfo&state=state#wechat_redirect'
 )
+
+# -----------------------------------------------------
+#       Django Celery
+# -----------------------------------------------------
+import djcelery
+djcelery.setup_loader()
+BROKER_URL = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
