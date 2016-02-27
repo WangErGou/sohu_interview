@@ -18,7 +18,6 @@ logger = logging.getLogger(__name__)
 TOKEN = settings.TOKEN
 
 
-@log_params
 def deal_server_verification(request):
     '''
     处理微信的服务器验证
@@ -32,7 +31,6 @@ def deal_server_verification(request):
     return HttpResponse('禁止访问')
 
 
-@log_params
 def deal_user_authorization(request):
     '''
     处理用户授权
