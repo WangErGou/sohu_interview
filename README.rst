@@ -34,10 +34,17 @@
 
 2. 在微信中点击下面的链接，同意授权后，点击链接获取用户信息
 
-`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb810fba238400a9f&redirect_uri=http%3A%2F%2F123.57.235.88%2FuserAuthorization%2F&response_type=code&scope=snsapi_userinfo&state=state#wechat_redirect
-<https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb810fba238400a9f&redirect_uri=http%3A%2F%2F123.57.235.88%2FuserAuthorization%2F&response_type=code&scope=snsapi_userinfo&state=state#wechat_redirect>`_
+`http://123.57.235.88/userInfo/ <http://123.57.235.88/userInfo/>`_
 
 PS: 微信可能会弹出如下提示，可能需要多点几次才会弹出实际页面。
 
 .. image:: doc_image/b91a6e424013456729786aaa09ec4f35.jpg
     :align: center
+
+测试记录
+========
+
+功能测试的过程记录在此：
+
+    - [] wxgz.utils.request_user_info_by_code_asy 异步执行正确
+    - [] 
