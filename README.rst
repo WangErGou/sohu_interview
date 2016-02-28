@@ -30,7 +30,6 @@
 1. 微信扫描二维码，关注测试公众号
 
 .. image:: doc_image/92721b212421b73adb8a643aa51ae08d.jpg
-    :scale: 10
     :align: center
 
 2. 在微信中点击下面的链接，同意授权后，点击链接获取用户信息
@@ -40,6 +39,5 @@
 
 PS: 微信可能会弹出如下提示，可能需要多点几次才会弹出实际页面。
 
-.. image:: doc_image/d495f6af0f145c77ed56d024daab8009.jpg
-    :scale: 10
+.. image:: doc_image/b91a6e424013456729786aaa09ec4f35.jpg
     :align: center
