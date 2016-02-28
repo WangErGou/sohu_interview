@@ -23,3 +23,23 @@
     1. 获取用户授权，并在回调中异步查询用户信息
     #. 提供接口用于展示用户自己的信息
     #. **（未实现）** 主动刷新 `access_token`
+
+使用
+====
+
+1. 微信扫描二维码，关注测试公众号
+
+.. image:: 92721b212421b73adb8a643aa51ae08d.jpg
+    :scale: 50
+    :align: center
+
+2. 在微信中点击下面的链接，同意授权后，点击链接获取用户信息
+
+`https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb810fba238400a9f&redirect_uri=http%3A%2F%2F123.57.235.88%2FuserAuthorization%2F&response_type=code&scope=snsapi_userinfo&state=state#wechat_redirect
+<https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxb810fba238400a9f&redirect_uri=http%3A%2F%2F123.57.235.88%2FuserAuthorization%2F&response_type=code&scope=snsapi_userinfo&state=state#wechat_redirect>`_
+
+PS: 微信可能会弹出如下提示，可能需要多点几次才会弹出实际页面。
+
+.. image:: d495f6af0f145c77ed56d024daab8009.jpg
+    :scale: 50
+    :align: center
