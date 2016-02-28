@@ -37,10 +37,12 @@ def deal_user_authorization(request):
     处理用户授权
     '''
     code = request.GET['code']
-    logger.debug('receive code: {code}'.format(code=code))  # debug
     request.session['user_code'] = code
-    # 根据 code 请求用户信息
-    request_user_info_by_code_asy(code)
+    try:
+        user_info = get_user_info(code)
+    except UserDoesNotExist:
+        # 根据 code 请求用户信息
+        request_user_info_by_code_asy(code)
     return render_to_response(
         'magic.html', {'uri': reverse('GetUserInfo')},
         context_instance=RequestContext(request))
