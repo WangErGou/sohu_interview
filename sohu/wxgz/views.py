@@ -8,10 +8,8 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.core.urlresolvers import reverse
 
-from wxgz.utils import (
-    get_user_info, verify_signature, request_user_info_by_code_asy,
-    log_params, authorized,
-)
+from wxgz.utils import get_user_info, verify_signature, authorized
+from wxgz.tasks import request_user_info_by_code_asy
 from wxgz.exceptions import UserDoesNotExist
 
 

@@ -61,4 +61,4 @@ PS: 微信可能会弹出如下提示，可能需要多点几次才会弹出实�
     - [ ] wxgz.tasks.request_user_info_by_code_asy 异步正确
 
 .. _userAuthorization: http://123.57.235.88/userAuthorization/
-.. _userInof: http://123.57.235.88/userInfo/
+.. _userInfo: http://123.57.235.88/userInfo/
