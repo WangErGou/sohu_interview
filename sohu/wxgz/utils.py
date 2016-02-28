@@ -114,6 +114,7 @@ def request_user_info_by_code_asy(code, lang='zh_CN'):
     '''
     根据用户授权后返回的 code 来获取用户信息
     '''
+    import time;time.sleep(30)
     try:
         openid, access_token = request_access_token(code)
         user_info = request_user_info(openid, access_token)

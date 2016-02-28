@@ -39,7 +39,7 @@ def deal_user_authorization(request):
     code = request.GET['code']
     request.session['user_code'] = code
     # 根据 code 请求用户信息
-    request_user_info_by_code_asy(code)
+    request_user_info_by_code_asy.delay(code)
     return render_to_response(
         'magic.html', {'uri': reverse('GetUserInfo')},
         context_instance=RequestContext(request))
