@@ -29,7 +29,7 @@
 
 1. 微信扫描二维码，关注测试公众号
 
-.. image:: image/92721b212421b73adb8a643aa51ae08d.jpg
+.. image:: doc_image/92721b212421b73adb8a643aa51ae08d.jpg
     :scale: 10
     :align: center
 
@@ -40,6 +40,6 @@
 
 PS: 微信可能会弹出如下提示，可能需要多点几次才会弹出实际页面。
 
-.. image:: image/d495f6af0f145c77ed56d024daab8009.jpg
+.. image:: doc_image/d495f6af0f145c77ed56d024daab8009.jpg
     :scale: 10
     :align: center
