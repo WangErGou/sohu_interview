@@ -6,7 +6,10 @@
 </head>
 <body>
     {% if fail %}
-    <p><font size=200>不认识你啊 :(</font></p>
+    <p><font size=200>
+        不认识你啊 :( <br>
+        <a href="{{ authorizationUri }}"> 再试试？ </a>
+    </font></p>
     {% else %}
     <img src="{{ headimgurl }}" />
     <p>

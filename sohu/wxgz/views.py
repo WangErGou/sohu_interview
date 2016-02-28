@@ -56,7 +56,8 @@ def get_self_info(request):
     except UserDoesNotExist as e:
         logger.info('查询的用户不存在: {0}'.format(e))
         return render_to_response(
-            'user_info.html', {'fail': True},
+            'user_info.html',
+            {'fail': True, 'authorizationUri': settings.ACCESS_SERVICE_URI},
             context_instance=RequestContext(request))
     return render_to_response(
         'user_info.html', user_info,
