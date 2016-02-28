@@ -46,5 +46,19 @@ PS: 微信可能会弹出如下提示，可能需要多点几次才会弹出实�
 
 功能测试的过程记录在此：
 
-    - [] wxgz.utils.request_user_info_by_code_asy 异步执行正确
-    - [] 
+    - [ ] 访问 userAuthorization_
+
+        - [ ] 携带有效 code，刷新session，更新用户信息，引导至 userInfo_
+        - [ ] 携带无效 code，刷新session，引导至 userInfo_
+        - [ ] 未携带 code，错误提示
+
+    - [ ] 访问 userInfo_
+
+        - [ ] 用户未授权或授权已失效，重定向至授权页面
+        - [ ] 存在对应用户信息，展示用户信息
+        - [ ] 不存在对应用户信息，引导至授权页面
+
+    - [ ] wxgz.tasks.request_user_info_by_code_asy 异步正确
+
+.. _userAuthorization: http://123.57.235.88/userAuthorization/
+.. _userInof: http://123.57.235.88/userInfo/
